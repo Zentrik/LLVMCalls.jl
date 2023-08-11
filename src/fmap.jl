@@ -51,7 +51,7 @@ fmap(f::F, x::Tuple, y::Tuple) where {F} = throw("Dimension mismatch.")
     push!(q.args, t); q
 end
 
-for op ∈ [:(-), :abs, , :floor, :ceil, :trunc, :round, :sqrt, :!, :~, :leading_zeros, :trailing_zeros, :inv]
+for op ∈ [:(-), :abs, :floor, :ceil, :trunc, :round, :sqrt, :!, :~, :leading_zeros, :trailing_zeros, :inv]
     @eval @inline Base.$op(v1::VecUnroll{N,W,T}) where {N,W,T} = VecUnroll(fmap($op, getfield(v1, :data)))
 end
 for op ∈ [:abs_fast, :abs2_fast, :sub_fast, :sqrt_fast, :inv_fast]
